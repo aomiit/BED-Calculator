@@ -1,0 +1,57 @@
+<!--index.wxml-->
+
+<template name="resultline">  
+  <view class="itemView" style="width:90%; display:flex;">     
+    <text style="width:18%;">α/β:</text>
+    <input id = "{{Num}}" style="border: 1px solid;border-color: lightblue;width:15%;" type="digit" name="{{Num}}" value = "{{alphabetavalue}}" bindinput ="AlphaBetaInput"/>
+    <text style="width:19%;">EQD2:</text>
+    <input class = "result" style="border: 1px solid;border-color: lightblue;width:15%;" disabled = "true" type="digit" name="ResultEQD2{{Num}}" value="{{eqd2value}}"/>
+    <text style="width:18%;">BED:</text>
+	  <input class = "result" style="border: 1px solid;border-color: lightblue;width:15%;" disabled = "true" type="digit" name="ResultBED{{Num}}" value="{{bedvalue}}"/>
+  </view>
+</template>
+
+<view>
+
+<official-account></official-account>
+
+<form bindsubmit="formSubmit">
+  <view class="container">
+    <view class="itemView" style="width:90%; display:flex;">  
+      <text style="width:50%;">分次剂量(Gy):</text>
+      <input style="border: 1px solid;border-color: lightblue;width:50%;" type="digit" name="Dosefx" placeholder="输入分次剂量" 
+        bindinput ="DosefxInput"/>
+    </view>
+
+    <view class="itemView" style="width:90%; display:flex;">  
+      <text style="width:50%;">总剂量(Gy):</text>
+      <input style="border: 1px solid;border-color: lightblue;width:50%;" type="digit" name="Dosetotal" placeholder="输入总剂量"              bindinput ="DosetotalInput"/>
+    </view>
+
+    <block wx:for="{{objectArray}}" wx:key="id">    
+      <template is="resultline" data="{{Num:item.id,alphabetavalue:item.alphabetavalue,eqd2value:item.eqd2value,bedvalue:item.bedvalue}}"/>
+    </block>
+
+    <view class="toolbar">
+      <button style="width:300rpx" formType="submit"> 计算 </button>
+    </view>
+
+    <view class="userinfo">
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="../images/medtools.jpg" background-size="cover"></image>
+        <text class="userinfo-nickname">更多的工具</text>
+    </view> 
+    
+    <view class="adContainer">
+      <ad 
+          unit-id="adunit-b278cd19166d1ec6" 
+      >
+      </ad>
+    </view>
+
+  </view>
+
+</form>
+
+<button style = "width:300rpx;align:center;" type="primary" open-type="share" data-name="pageShare" id="share">分享</button>
+
+</view>
