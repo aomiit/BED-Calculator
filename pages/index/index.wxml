@@ -17,15 +17,20 @@
 
 <form bindsubmit="formSubmit">
   <view class="container">
-    <view class="itemView" style="width:90%; display:flex;">  
-      <text style="width:50%;">分次剂量(Gy):</text>
-      <input style="border: 1px solid;border-color: lightblue;width:50%;" type="digit" name="Dosefx" placeholder="输入分次剂量" 
-        bindinput ="DosefxInput"/>
-    </view>
 
     <view class="itemView" style="width:90%; display:flex;">  
       <text style="width:50%;">总剂量(Gy):</text>
-      <input style="border: 1px solid;border-color: lightblue;width:50%;" type="digit" name="Dosetotal" placeholder="输入总剂量"              bindinput ="DosetotalInput"/>
+      <input style="border: 1px solid;border-color: lightblue;width:50%;" type="digit" name="Dosetotal" value="{{nDosetotal}}" placeholder="输入总剂量" bindinput ="DosetotalInput"/>
+    </view>
+
+    <view class="itemView" style="width:90%; display:flex;">  
+      <text style="width:50%;">分次:</text>
+      <input style="border: 1px solid;border-color: lightblue;width:50%;" type="number" name="Fx" value="{{nFx}}" placeholder="输入分次数"  bindinput ="FxInput"/>
+    </view>
+
+    <view class="itemView" style="width:90%; display:flex;">  
+      <text style="width:50%;">分次剂量(Gy):</text>
+      <input style="border: 1px solid;border-color: lightblue;width:50%;" type="digit" name="Dosefx" value="{{nDosefx}}" placeholder="输入分次剂量" bindinput ="DosefxInput"/>
     </view>
 
     <block wx:for="{{objectArray}}" wx:key="id">    
@@ -36,9 +41,13 @@
       <button style="width:300rpx" formType="submit"> 计算 </button>
     </view>
 
+    <text class="main_info">
+    注：总剂量，分次，分次剂量 三选二输入。
+    </text>
+
     <view class="userinfo">
         <image bindtap="bindViewTap" class="userinfo-avatar" src="../images/medtools.jpg" background-size="cover"></image>
-        <text class="userinfo-nickname">更多的工具</text>
+        <text class="userinfo-nickname">更多医学计算工具</text>
     </view> 
     
     <view class="adContainer">

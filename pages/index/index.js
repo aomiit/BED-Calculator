@@ -6,8 +6,9 @@ Page(
   {
     data: 
     {
-      nDosefx:'0',
-      nDosetotal:'0',
+      nDosefx:null,
+      nDosetotal: null,
+      nFx: null,
       objectArray: [
         { id: 1, alphabetavalue: 1, eqd2value: '', bedvalue: ''},
         { id: 2, alphabetavalue: 2, eqd2value: '', bedvalue: '' },
@@ -86,6 +87,14 @@ Page(
         nDosetotal: e.detail.value
       })
     },
+    
+    FxInput: function(e) {
+      this.ClearResult()
+
+      this.setData({
+        nFx: e.detail.value
+      })      
+    },
 
     AlphaBetaInput: function (e) {      
       //console.log('携带数据为：', e)  
@@ -93,17 +102,98 @@ Page(
       this.setData({
         objectArray: this.data.objectArray
       })
-      this.ClearResult()
+    },
+
+    CheckInput: function () {
+
+      var times = 0;
+
+      var bTotal = false;
+      var Dosetotal = this.data.nDosetotal; 
+      try {
+        Dosetotal = Dosetotal.replace(/,/g, '.');
+        Dosetotal = parseFloat(Dosetotal);
+        if (Dosetotal > 0)
+        {
+          bTotal = true;
+          times = times+1;
+        }
+      }catch(e){
+        bTotal = false;
+      }
+
+      var bDosefx = false;
+      var Dosefx = this.data.nDosefx;
+      try {
+        Dosefx = Dosefx.replace(/,/g, '.');
+        Dosefx = parseFloat(Dosefx);
+        if (Dosefx > 0) {
+          bDosefx = true;
+          times = times + 1;
+        }
+      } catch (e) {
+        bDosefx = false;
+      }
+
+      var bFx = false;
+      var Fx = this.data.nFx;
+      try {
+        Fx = parseInt(Fx);
+        if (Fx > 0) {
+          bFx = true;
+          times = times + 1;
+        }
+      } catch (e) {
+        bFx = false;
+      }
+
+      if(times == 3)
+      {
+        Dosefx = Dosetotal / Fx;
+        this.setData({
+          nDosefx: Dosefx.toFixed(2)
+        })  
+      }
+
+      if (times == 2)
+      {
+        if (bTotal == false)  
+        {
+          Dosetotal = Dosefx*Fx;
+          this.setData({
+            nDosetotal: Dosetotal.toFixed(2)
+          }) 
+        }
+
+        if (bDosefx == false) {
+          Dosefx = Dosetotal / Fx;
+          this.setData({
+            nDosefx: Dosefx.toFixed(2)
+          })
+        }
+      
+        if (bFx == false) {
+          Fx = Dosetotal / Dosefx;
+          this.setData({
+            nFx: Fx.toFixed(0)
+          })
+
+          this.CheckInput();
+        }
+      
+      }
     },
 
     EQD2: function ()
     {
+      this.CheckInput();
+
       var Dosefx = this.data.nDosefx;
-      Dosefx = Dosefx.replace(/,/g, '.');
-      Dosefx = parseFloat(Dosefx);
+      // Dosefx = Dosefx.replace(/,/g, '.');
+      // Dosefx = parseFloat(Dosefx);
       var Dosetotal = this.data.nDosetotal;
-      Dosetotal = Dosetotal.replace(/,/g, '.');
-      Dosetotal = parseFloat(Dosetotal);
+      // Dosetotal = Dosetotal.replace(/,/g, '.');
+      // Dosetotal = parseFloat(Dosetotal);
       
       const length = this.data.objectArray.length
       for (let i = 0; i < length; ++i)
