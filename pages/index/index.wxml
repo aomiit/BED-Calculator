@@ -48,19 +48,20 @@
     <view class="userinfo">
         <image bindtap="bindViewTap" class="userinfo-avatar" src="../images/medtools.jpg" background-size="cover"></image>
         <text class="userinfo-nickname">更多医学计算工具</text>
-    </view> 
-    
-    <view class="adContainer">
-      <ad 
-          unit-id="adunit-b278cd19166d1ec6" 
-      >
-      </ad>
-    </view>
+    </view>    
+
 
   </view>
 
 </form>
 
 <button style = "width:300rpx;align:center;" type="primary" open-type="share" data-name="pageShare" id="share">分享</button>
+
+<view class="adContainer">
+  <ad 
+      unit-id="adunit-b278cd19166d1ec6" 
+  >
+  </ad>
+</view>
 
 </view>
