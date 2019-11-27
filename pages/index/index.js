@@ -193,7 +193,7 @@ Page(
       // Dosefx = parseFloat(Dosefx);
       var Dosetotal = this.data.nDosetotal;
       // Dosetotal = Dosetotal.replace(/,/g, '.');
-      // Dosetotal = parseFloat(Dosetotal);
+      Dosetotal = parseFloat(Dosetotal);
       
       const length = this.data.objectArray.length
       for (let i = 0; i < length; ++i)
