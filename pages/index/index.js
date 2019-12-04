@@ -190,7 +190,7 @@ Page(
 
       var Dosefx = this.data.nDosefx;
       // Dosefx = Dosefx.replace(/,/g, '.');
-      // Dosefx = parseFloat(Dosefx);
+      Dosefx = parseFloat(Dosefx);
       var Dosetotal = this.data.nDosetotal;
       // Dosetotal = Dosetotal.replace(/,/g, '.');
       Dosetotal = parseFloat(Dosetotal);
